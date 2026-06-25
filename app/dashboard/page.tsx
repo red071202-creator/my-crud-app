@@ -2,7 +2,11 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { logoutUser } from "./actions";
-import { createTask } from "./task-actions";
+import {
+  createTask,
+  deleteTask,
+  toggleTaskCompleted,
+} from "./task-actions";
 
 export default async function DashboardPage() {
   const cookieStore = await cookies();
@@ -130,9 +134,27 @@ export default async function DashboardPage() {
                       ) : null}
                     </div>
 
-                    <span className="rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-600">
-                      {task.completed ? "Done" : "Open"}
-                    </span>
+                    <div className="flex shrink-0 items-center gap-2">
+                      <form action={toggleTaskCompleted}>
+                        <input type="hidden" name="taskId" value={task.id} />
+                        <button
+                          type="submit"
+                          className="rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-700 transition hover:bg-zinc-200"
+                        >
+                          {task.completed ? "Mark open" : "Mark done"}
+                        </button>
+                      </form>
+
+                      <form action={deleteTask}>
+                        <input type="hidden" name="taskId" value={task.id} />
+                        <button
+                          type="submit"
+                          className="rounded-md border border-red-200 bg-white px-2 py-1 text-xs font-medium text-red-700 transition hover:bg-red-50"
+                        >
+                          Delete
+                        </button>
+                      </form>
+                    </div>
                   </div>
                 </li>
               ))}

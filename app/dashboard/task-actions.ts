@@ -5,8 +5,8 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 
-async function getCurrentUserId() {
-  const cookieStore = await cookies();
+async function getCurrentUserId() { // who is the currently logged in user?
+  const cookieStore = await cookies(); // Using compare browser token and the token from the session talbe from server.
   const token = cookieStore.get("session")?.value;
 
   if (!token) {
@@ -41,6 +41,55 @@ export async function createTask(formData: FormData) {
     data: {
       title,
       description: description || null,
+      userId,
+    },
+  });
+
+  revalidatePath("/dashboard");
+}
+
+export async function toggleTaskCompleted(formData: FormData) {
+  const userId = await getCurrentUserId();
+  const taskId = String(formData.get("taskId") ?? "");
+
+  if (!taskId) {
+    throw new Error("Task id is required.");
+  }
+
+  const task = await prisma.task.findFirst({
+    where: {
+      id: taskId, // comparing of id from task model/table and taskId for the specific task you click. Medyo magulo pa para saakin pero medyo gets na
+      userId, // sinesearch mo den na dapat yung task nayon ay may userId na userId
+    },
+  });
+
+  if (!task) {
+    throw new Error("Task not found.");
+  }
+
+  await prisma.task.update({
+    where: {
+      id: task.id, // compare the task id to the task variable id to know what to to toggle.
+    },
+    data: {
+      completed: !task.completed,
+    },
+  });
+
+  revalidatePath("/dashboard");
+}
+
+export async function deleteTask(formData: FormData) {
+  const userId = await getCurrentUserId();
+  const taskId = String(formData.get("taskId") ?? "");
+
+  if (!taskId) {
+    throw new Error("Task id is required.");
+  }
+
+  await prisma.task.deleteMany({
+    where: {
+      id: taskId,
       userId,
     },
   });
