@@ -79,6 +79,44 @@ export async function toggleTaskCompleted(formData: FormData) {
   revalidatePath("/dashboard");
 }
 
+export async function updateTask(formData: FormData){
+  const userId = await getCurrentUserId();
+  const taskId = String(formData.get("taskId") ?? "");
+  const title = String(formData.get("title") ?? "").trim();
+  const description = String(formData.get("description") ?? "").trim();
+
+  if (!taskId) {
+    throw new Error("Task id is required.");
+  }
+
+  if (!title) {
+    throw new Error("Task title is required.");
+  }
+
+  const task = await prisma.task.findFirst({
+    where: {
+      id: taskId, 
+      userId, 
+    },
+  });
+
+  if (!task) {
+    throw new Error("Task not found.");
+  }
+
+  await prisma.task.update({
+    where: {
+      id: task.id,
+    },
+    data: {
+      title,
+      description: description || null,
+    },
+  });
+
+  revalidatePath("/dashboard");
+}
+
 export async function deleteTask(formData: FormData) {
   const userId = await getCurrentUserId();
   const taskId = String(formData.get("taskId") ?? "");
