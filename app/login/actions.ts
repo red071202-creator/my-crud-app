@@ -24,6 +24,10 @@ export async function loginUser(formData: FormData) {
     throw new Error("Invalid email or password.");
   }
 
+  if (!user.passwordHash) {
+    throw new Error("Please sign in with Google for this account.");
+  }
+
   const passwordsMatch = await compare(password, user.passwordHash);
 
   if (!passwordsMatch) {
