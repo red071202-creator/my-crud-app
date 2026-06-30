@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tasks CRUD App
+
+A learning project built with Next.js, Prisma, SQLite, and custom authentication.
+
+## Features
+
+- Register with email and password
+- Login with email and password
+- Login with Google
+- Password hashing with bcryptjs
+- Session-based authentication with cookies
+- Protected dashboard
+- Create, read, update, complete, and delete tasks
+- Toast notifications with Sonner
+
+## Tech Stack
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Prisma
+- SQLite
+- bcryptjs
+- Sonner
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create and update the local database:
+
+```bash
+npx.cmd prisma migrate dev
+```
+
+Generate Prisma Client:
+
+```bash
+npx.cmd prisma generate
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open the app:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```txt
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables
 
-## Learn More
+Create a `.env` file in the project root:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+DATABASE_URL="file:./dev.db"
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_SECRET=""
+GOOGLE_REDIRECT_URI="http://localhost:3000/api/auth/google/callback"
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+For Google login, create OAuth credentials in Google Cloud Console and use this local redirect URI:
 
-## Deploy on Vercel
+```txt
+http://localhost:3000/api/auth/google/callback
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Prisma
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open Prisma Studio:
+
+```bash
+npx.cmd prisma studio
+```
+
+After changing `prisma/schema.prisma`, run:
+
+```bash
+npx.cmd prisma migrate dev
+npx.cmd prisma generate
+```
+
+If the dev server is running, restart it after schema changes:
+
+```bash
+npm run dev
+```
+
+## Notes
+
+This project uses SQLite for local learning. For deployment, the database can later be migrated to PostgreSQL.
