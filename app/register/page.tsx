@@ -60,6 +60,21 @@ export default function RegisterPage() {
           </button>
         </form>
 
+        <div className="my-6 flex items-center gap-3">
+          <div className="h-px flex-1 bg-zinc-200" />
+          <span className="text-xs font-medium uppercase text-zinc-500">
+            or
+          </span>
+          <div className="h-px flex-1 bg-zinc-200" />
+        </div>
+
+        <a
+          href="/api/auth/google"
+          className="flex w-full items-center justify-center rounded-md border border-zinc-300 bg-white px-4 py-2.5 text-sm font-medium text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-100"
+        >
+          Continue with Google
+        </a>
+
         <p className="mt-6 text-center text-sm text-zinc-600">
           Already have an account?{" "}
           <Link href="/login" className="font-medium text-zinc-950">
