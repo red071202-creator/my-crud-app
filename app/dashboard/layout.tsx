@@ -9,7 +9,15 @@ export default function DashboardLayout({
   return (
     <>
       {children}
-      <Toaster richColors position="top-right" />
+      <Toaster
+        richColors
+        position="top-right"
+        toastOptions={{
+          classNames: {
+            toast: "rounded-2xl border border-teal-100 shadow-lg",
+          },
+        }}
+      />
     </>
   );
 }

@@ -17,12 +17,12 @@ export function CreateTaskForm() {
     <form
       ref={formRef}
       action={handleCreateTask}
-      className="mt-5 space-y-4"
+      className="mt-6 space-y-5"
     >
       <div>
         <label
           htmlFor="title"
-          className="block text-sm font-medium text-zinc-800"
+          className="block text-sm font-medium text-slate-800"
         >
           Title
         </label>
@@ -31,14 +31,14 @@ export function CreateTaskForm() {
           name="title"
           type="text"
           required
-          className="mt-2 w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-zinc-950 outline-none focus:border-zinc-900"
+          className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-4 focus:ring-teal-100"
         />
       </div>
 
       <div>
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-zinc-800"
+          className="block text-sm font-medium text-slate-800"
         >
           Description
         </label>
@@ -46,13 +46,13 @@ export function CreateTaskForm() {
           id="description"
           name="description"
           rows={3}
-          className="mt-2 w-full resize-none rounded-md border border-zinc-300 bg-white px-3 py-2 text-zinc-950 outline-none focus:border-zinc-900"
+          className="mt-2 w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-4 focus:ring-teal-100"
         />
       </div>
 
       <button
         type="submit"
-        className="rounded-md bg-zinc-950 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-800"
+        className="w-full rounded-2xl bg-teal-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-600/20 transition hover:-translate-y-0.5 hover:bg-teal-700 active:translate-y-0"
       >
         Create task
       </button>

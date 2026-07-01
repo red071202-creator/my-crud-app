@@ -9,7 +9,7 @@ export function PasswordInput() {
     <div>
       <label
         htmlFor="password"
-        className="block text-sm font-medium text-zinc-800"
+        className="block text-sm font-medium text-slate-800"
       >
         Password
       </label>
@@ -20,13 +20,13 @@ export function PasswordInput() {
           type={showPassword ? "text" : "password"}
           autoComplete="current-password"
           required
-          className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 pr-11 text-zinc-950 outline-none focus:border-zinc-900"
+          className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 pr-12 text-slate-950 outline-none transition focus:border-teal-500 focus:ring-4 focus:ring-teal-100"
         />
         <button
           type="button"
           aria-label={showPassword ? "Hide password" : "Show password"}
           onClick={() => setShowPassword((current) => !current)}
-          className="absolute inset-y-0 right-0 flex w-11 items-center justify-center text-zinc-500 hover:text-zinc-900"
+          className="absolute inset-y-0 right-0 flex w-12 items-center justify-center text-slate-500 transition hover:text-teal-700"
         >
           {showPassword ? (
             <svg

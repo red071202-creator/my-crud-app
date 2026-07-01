@@ -15,33 +15,33 @@ export function LogoutButton() {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-100"
+        className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-teal-200 hover:bg-teal-50 hover:text-teal-700 active:scale-[0.98]"
       >
         Logout
       </button>
 
       {isOpen ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-          <div className="w-full max-w-sm rounded-md bg-white p-6 shadow-lg">
-            <h2 className="text-lg font-semibold text-zinc-950">
+        <div className="fixed inset-0 z-50 grid min-h-dvh place-items-center bg-slate-950/50 px-4 py-8 backdrop-blur-sm">
+          <div className="w-full max-w-xs rounded-2xl border border-white/80 bg-white p-5 shadow-xl shadow-slate-950/20">
+            <h2 className="text-lg font-semibold text-slate-950">
               Log out?
             </h2>
-            <p className="mt-2 text-sm text-zinc-600">
+            <p className="mt-1.5 text-sm leading-5 text-slate-600">
               You will need to sign in again to access your tasks.
             </p>
 
-            <div className="mt-6 flex justify-end gap-3">
+            <div className="mt-5 flex justify-end gap-2">
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-100"
+                className="rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm font-semibold text-slate-700 transition hover:border-teal-200 hover:bg-teal-50 hover:text-teal-700 active:scale-[0.98]"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={handleLogout}
-                className="rounded-md bg-zinc-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800"
+                className="rounded-xl bg-teal-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm shadow-teal-600/20 transition hover:bg-teal-700 active:scale-[0.98]"
               >
                 Logout
               </button>

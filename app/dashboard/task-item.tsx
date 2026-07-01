@@ -42,30 +42,49 @@ export function TaskItem({ task }: TaskItemProps) { // ang type niya ay yung gin
   }
 
   return (
-    <li className="py-4 first:pt-0 last:pb-0">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h3 className="font-medium text-zinc-950">{task.title}</h3>
+    <li className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-teal-200 hover:shadow-md hover:shadow-teal-100">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <h3
+              className={`font-semibold text-slate-950 ${
+                task.completed ? "text-slate-500 line-through" : ""
+              }`}
+            >
+              {task.title}
+            </h3>
+            <span
+              className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
+                task.completed
+                  ? "bg-teal-50 text-teal-700 ring-1 ring-teal-100"
+                  : "bg-slate-100 text-slate-600 ring-1 ring-slate-200"
+              }`}
+            >
+              {task.completed ? "Done" : "Pending"}
+            </span>
+          </div>
           {task.description ? (
-            <p className="mt-1 text-sm text-zinc-600">{task.description}</p>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              {task.description}
+            </p>
           ) : null}
         </div>
 
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex shrink-0 flex-wrap items-center gap-2">
           <form action={handleToggleTaskCompleted}>
             <input type="hidden" name="taskId" value={task.id} />
             <button
               type="submit"
-              className="rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-700 transition hover:bg-zinc-200"
+              className="rounded-xl border border-teal-100 bg-teal-50 px-3 py-2 text-xs font-semibold text-teal-700 transition hover:bg-teal-100 active:scale-[0.98]"
             >
-              {task.completed ? "Done" : "Pending"}
+              {task.completed ? "Mark pending" : "Mark done"}
             </button>
           </form>
 
           <button
             type="button"
             onClick={() => setIsEditing((current) => !current)}
-            className="rounded-md border border-zinc-300 bg-white px-2 py-1 text-xs font-medium text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-100"
+            className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-teal-200 hover:bg-teal-50 hover:text-teal-700 active:scale-[0.98]"
           >
             {isEditing ? "Cancel" : "Edit"}
           </button>
@@ -74,7 +93,7 @@ export function TaskItem({ task }: TaskItemProps) { // ang type niya ay yung gin
             <input type="hidden" name="taskId" value={task.id} />
             <button
               type="submit"
-              className="rounded-md border border-red-200 bg-white px-2 py-1 text-xs font-medium text-red-700 transition hover:bg-red-50"
+              className="rounded-xl border border-red-200 bg-white px-3 py-2 text-xs font-semibold text-red-700 transition hover:bg-red-50 active:scale-[0.98]"
             >
               Delete
             </button>
@@ -83,13 +102,16 @@ export function TaskItem({ task }: TaskItemProps) { // ang type niya ay yung gin
       </div>
 
       {isEditing ? (
-        <form action={handleUpdateTask} className="mt-4 space-y-3">
+        <form
+          action={handleUpdateTask}
+          className="mt-4 space-y-4 rounded-2xl border border-teal-100 bg-teal-50/60 p-4"
+        >
           <input type="hidden" name="taskId" value={task.id} />
 
           <div>
             <label
               htmlFor={`title-${task.id}`}
-              className="block text-xs font-medium text-zinc-700"
+              className="block text-xs font-semibold uppercase tracking-wide text-teal-700"
             >
               Edit title
             </label>
@@ -99,14 +121,14 @@ export function TaskItem({ task }: TaskItemProps) { // ang type niya ay yung gin
               type="text"
               required
               defaultValue={task.title}
-              className="mt-1 w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-950 outline-none focus:border-zinc-900"
+              className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition focus:border-teal-500 focus:ring-4 focus:ring-teal-100"
             />
           </div>
 
           <div>
             <label
               htmlFor={`description-${task.id}`}
-              className="block text-xs font-medium text-zinc-700"
+              className="block text-xs font-semibold uppercase tracking-wide text-teal-700"
             >
               Edit description
             </label>
@@ -115,13 +137,13 @@ export function TaskItem({ task }: TaskItemProps) { // ang type niya ay yung gin
               name="description"
               rows={2}
               defaultValue={task.description ?? ""}
-              className="mt-1 w-full resize-none rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-950 outline-none focus:border-zinc-900"
+              className="mt-2 w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition focus:border-teal-500 focus:ring-4 focus:ring-teal-100"
             />
           </div>
 
           <button
             type="submit"
-            className="rounded-md border border-zinc-300 bg-white px-3 py-2 text-xs font-medium text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-100"
+            className="rounded-xl bg-teal-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm shadow-teal-600/20 transition hover:bg-teal-700 active:scale-[0.98]"
           >
             Save changes
           </button>
